@@ -1,0 +1,56 @@
+name: Sync Codeforces Submissions
+
+on:
+  schedule:
+    - cron: '0 0 * * *'   # Every day at 12:00 AM UTC
+  workflow_dispatch:        # Allows manual trigger from the Actions tab
+
+permissions:
+  contents: write           # Required to commit and push files back to the repo
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout repo content
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      # 2. Set up Python
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      # 3. Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # 4. Run the sync script — CF_HANDLE is read from GitHub Repository Secrets
+      - name: Sync Codeforces Submissions
+
+        env:
+          CF_HANDLE: ${{ secrets.CF_HANDLE }}
+        run: python sync_codeforces.py
+
+
+      # 5. Commit and push any changes back to the repo
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name  "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if [ -n "$(git status --porcelain)" ]; then
+            git add .
+            git commit -m "chore: auto-sync Codeforces submissions [skip ci]"
+            git push origin main
+          else
+            echo "Nothing to commit — repo is already up to date."
+          fi
