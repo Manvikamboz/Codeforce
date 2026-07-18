@@ -257,13 +257,8 @@ def update_readme(solved_list, user_info=None):
 
         out.append(f"| {idx} | {prob_link} | {diff_str} | {tags_str} | {lang} |\n")
 
-    out.append('\n---\n\n')
-    out.append(
-        '<div align="center">\n\n'
-        '*Auto-synced daily via [GitHub Actions](../../actions) · '
-        'Powered by the [Codeforces API](https://codeforces.com/apiHelp)*\n\n'
-        '</div>\n'
-    )
+
+
 
     with open(README_FILE, "w", encoding="utf-8") as f:
         f.writelines(out)

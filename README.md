@@ -18,11 +18,3 @@
 
 | # | Problem | Difficulty | Tags | Language |
 |:-:|---------|:----------:|------|----------|
-
----
-
-<div align="center">
-
-*Auto-synced every 30 minutes via [GitHub Actions](../../actions) · Powered by the [Codeforces API](https://codeforces.com/apiHelp)*
-
-</div>
