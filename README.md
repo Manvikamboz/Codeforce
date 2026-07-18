@@ -16,13 +16,13 @@
 
 ## Accepted Submissions
 
-| # | Problem | Difficulty | Tags | Language | Date |
-|:-:|---------|:----------:|------|----------|:----:|
+| # | Problem | Difficulty | Tags | Language |
+|:-:|---------|:----------:|------|----------|
 
 ---
 
 <div align="center">
 
-*Auto-synced daily via [GitHub Actions](../../actions) · Powered by the [Codeforces API](https://codeforces.com/apiHelp)*
+*Auto-synced every 30 minutes via [GitHub Actions](../../actions) · Powered by the [Codeforces API](https://codeforces.com/apiHelp)*
 
 </div>

@@ -13,7 +13,6 @@ import os
 import sys
 import re
 import time
-from datetime import datetime
 
 import requests
 from bs4 import BeautifulSoup
@@ -237,8 +236,8 @@ def update_readme(solved_list, user_info=None):
 
     # --- Submission table -----------------------------------------------------
     out.append('## Accepted Submissions\n\n')
-    out.append('| # | Problem | Difficulty | Tags | Language | Date |\n')
-    out.append('|:-:|---------|:----------:|------|----------|:----:|\n')
+    out.append('| # | Problem | Difficulty | Tags | Language |\n')
+    out.append('|:-:|---------|:----------:|------|----------|\n')
 
     for idx, sub in enumerate(solved_list, 1):
         prob       = sub["problem"]
@@ -248,7 +247,6 @@ def update_readme(solved_list, user_info=None):
         rating_val = prob.get("rating")
         tags_str   = " • ".join(f"`{t}`" for t in prob.get("tags", []))
         lang       = sub["programmingLanguage"]
-        date       = datetime.fromtimestamp(sub["creationTimeSeconds"]).strftime("%b %d, %Y")
 
         diff_str = f'{rating_val} ({diff_label(rating_val)})' if isinstance(rating_val, int) else "N/A"
 
@@ -257,7 +255,7 @@ def update_readme(solved_list, user_info=None):
         prob_url  = f"{base_url}/{contest_id}/problem/{prob_idx}"
         prob_link = f"**[{prob_name}]({prob_url})**"
 
-        out.append(f"| {idx} | {prob_link} | {diff_str} | {tags_str} | {lang} | {date} |\n")
+        out.append(f"| {idx} | {prob_link} | {diff_str} | {tags_str} | {lang} |\n")
 
     out.append('\n---\n\n')
     out.append(
